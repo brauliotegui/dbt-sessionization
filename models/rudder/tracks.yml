@@ -1,11 +1,51 @@
 version: 2
 sources:
-    - name: <schema>
+    - name: src_rudderstack
+      database: RUDDER_EVENTS_PROD
+      schema: PUBLIC
       tables:
-        - name: TRACKS
+        - name: PUBLIC_TRACKS
+          identifier: TRACKS
           columns:
-            - name: anonymous_id
-
-            - name: user_id
-
-            - name: timestamp
+              - name: CONTEXT_PAGE_PATH
+                data_type: TEXT
+              - name: CONTEXT_LIBRARY_VERSION
+                data_type: TEXT
+              - name: CONTEXT_SOURCE_ID
+                data_type: TEXT
+              - name: CONTEXT_APP_NAME
+                data_type: TEXT
+              - name: CONTEXT_PAGE_TAB_URL
+                data_type: TEXT
+              - name: USER_ID
+                data_type: TEXT
+              - name: CONTEXT_SCREEN_DENSITY
+                data_type: NUMBER
+              - name: CONTEXT_REQUEST_IP
+                data_type: TEXT
+              - name: CONTEXT_TRAITS_EMAIL
+                data_type: TEXT
+              - name: ANONYMOUS_ID
+                data_type: TEXT
+              - name: CONTEXT_APP_NAMESPACE
+                data_type: TEXT
+              - name: CONTEXT_PAGE_TITLE
+                data_type: TEXT
+              - name: CONTEXT_SCREEN_INNER_WIDTH
+                data_type: NUMBER
+              - name: CHANNEL
+                data_type: TEXT
+              - name: ID
+                data_type: TEXT
+              - name: CONTEXT_PAGE_URL
+                data_type: TEXT
+              - name: CONTEXT_IP
+                data_type: TEXT
+              - name: SENT_AT
+                data_type: TIMESTAMP_TZ
+              - name: CONTEXT_SOURCE_TYPE
+                data_type: TEXT
+              - name: CONTEXT_APP_VERSION
+                data_type: TEXT
+              - name: CONTEXT_USER_AGENT
+                data_type: TEXT
