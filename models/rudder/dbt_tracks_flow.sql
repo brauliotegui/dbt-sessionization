@@ -11,13 +11,13 @@ with derived_table as (
             event_id,
             session_id,
             track_sequence_number,
-            first_value(event IGNORE NULLS) over(partition by session_id order by track_sequence_number asc) as event,
+            FIRST_VALUE(EVENT IGNORE NULLS) OVER (PARTITION BY SESSION_ID ORDER BY TRACK_SEQUENCE_NUMBER ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS EVENT,
             dbt_visitor_id,
             timestamp,
-            nth_value(event,2 IGNORE NULLS) over(partition by session_id order by track_sequence_number asc) as second_event,
-            nth_value(event,3 IGNORE NULLS) over(partition by session_id order by track_sequence_number asc) as third_event,
-            nth_value(event,4 IGNORE NULLS) over(partition by session_id order by track_sequence_number asc) as fourth_event,
-            nth_value(event,5 IGNORE NULLS) over(partition by session_id order by track_sequence_number asc) as fifth_event,
+            NTH_VALUE(EVENT, 2) OVER (PARTITION BY SESSION_ID ORDER BY TRACK_SEQUENCE_NUMBER ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS SECOND_EVENT,
+            NTH_VALUE(EVENT, 3) OVER (PARTITION BY SESSION_ID ORDER BY TRACK_SEQUENCE_NUMBER ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS THIRD_EVENT,
+            NTH_VALUE(EVENT, 4) OVER (PARTITION BY SESSION_ID ORDER BY TRACK_SEQUENCE_NUMBER ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS FOURTH_EVENT,
+            NTH_VALUE(EVENT, 5) OVER (PARTITION BY SESSION_ID ORDER BY TRACK_SEQUENCE_NUMBER ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS FIFTH_EVENT,
             from {{ ref('dbt_track_facts') }}
         )
 
