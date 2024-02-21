@@ -7,7 +7,7 @@
 {{ config(materialized='table') }}
 
 select *
-        ,timestamp_diff(cast(timestamp as timestamp), cast(lag(timestamp) over(partition by dbt_visitor_id order by timestamp) as timestamp), minute) as idle_time_minutes
+        ,DATEDIFF('MINUTE', LAG("TIMESTAMP") OVER (PARTITION BY DBT_VISITOR_ID ORDER BY "TIMESTAMP"), "TIMESTAMP") AS IDLE_TIME_MINUTES
       from (
         select t.id as event_id
           ,t.anonymous_id
