@@ -10,6 +10,8 @@ with derived_table as (
           select
             event_id,
             session_id,
+            ORG_SLUG,
+            USER_EMAIL,
             track_sequence_number,
             FIRST_VALUE(EVENT IGNORE NULLS) OVER (PARTITION BY SESSION_ID ORDER BY TRACK_SEQUENCE_NUMBER ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS EVENT,
             dbt_visitor_id,
@@ -26,6 +28,8 @@ with derived_table as (
             , track_sequence_number
             , event
             , dbt_visitor_id
+            , ORG_SLUG
+            , USER_EMAIL
             , cast(timestamp as timestamp) as timestamp
             , second_event as event_2
             , third_event as event_3
