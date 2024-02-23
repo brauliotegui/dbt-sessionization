@@ -11,7 +11,5 @@ A decision is made to treat two events, for the same user, that are separated by
       , timestamp as session_start_at
       , row_number() over(partition by dbt_visitor_id order by timestamp) as session_sequence_number
       , lead(timestamp) over(partition by dbt_visitor_id order by timestamp) as next_session_start_at
-      , ORG_SLUG
-      , USER_EMAIL
 from {{ ref('dbt_mapped_tracks') }}
 where (idle_time_minutes > 30 or idle_time_minutes is null)
