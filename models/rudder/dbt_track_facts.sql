@@ -16,6 +16,8 @@ select t.anonymous_id
           , s.session_id
           , t.dbt_visitor_id
           , row_number() over(partition by s.session_id order by t.timestamp) as track_sequence_number
+          , ORG_SLUG
+          , USER_EMAIL
         from {{ ref('dbt_mapped_tracks') }} as t
         inner join {{ ref('dbt_session_tracks') }} as s
         on t.dbt_visitor_id = s.dbt_visitor_id
