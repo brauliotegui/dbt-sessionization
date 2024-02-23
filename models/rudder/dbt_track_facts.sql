@@ -15,8 +15,6 @@ select t.anonymous_id
           , t.event AS event
           , s.session_id
           , t.dbt_visitor_id
-          , s.ORG_SLUG
-          , s.USER_EMAIL
           , row_number() over(partition by s.session_id order by t.timestamp) as track_sequence_number
         from {{ ref('dbt_mapped_tracks') }} as t
         inner join {{ ref('dbt_session_tracks') }} as s
