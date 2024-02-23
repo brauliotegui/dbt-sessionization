@@ -18,3 +18,8 @@ select *
         inner join {{ ref('dbt_aliases_mapping') }} as a2v
         on a2v.alias = coalesce(t.user_id, t.anonymous_id)
         )
+        LEFT JOIN 
+        ( SELECT id, org_slug, user_email 
+          FROM {{ ref('mrt_user_events')}}
+        ) t2
+        ON event_id = t2.id
